@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#header-title {
+    color: #333; /* Header text color */
+    text-align: center; /* Center-align the text */
+    color: violet;
+}
+
+#wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.border {
+    border: 2px solid #00f; /* Blue border color */
+    padding: 10px;
+    margin: 10px; /* Add space around each span */
+}
+
+.design {
+    color: #ff69b4; /* Pink text color */
+    width: 100px;
+    height: 50%;
+    font-size: larger;
+}
+.inner-para{
+    text-align: center;
+    color:  darkgreen;
+    font-weight: bold;
+}
+
