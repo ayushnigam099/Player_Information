@@ -1,33 +1,66 @@
-body {
-    font-family: Arial, sans-serif;
+body, h1, h2, p, form {
+    margin: 0;
+    padding: 0;
 }
 
-#header-title {
-    color: #333; /* Header text color */
-    text-align: center; /* Center-align the text */
-    color: violet;
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
 }
 
 #wrapper {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.border {
-    border: 2px solid #00f; /* Blue border color */
+    width: 500px;
+    margin: 50px auto;
+    background-color: #acd2e3;
     padding: 10px;
-    margin: 10px; /* Add space around each span */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.design {
-    color: #ff69b4; /* Pink text color */
-    width: 100px;
-    height: 50%;
-    font-size: larger;
+form {
+    display: flex;
+    flex-direction: column;
+    color: rgb(140, 10, 10);
 }
-.inner-para{
-    text-align: center;
-    color:  darkgreen;
+
+label {
     font-weight: bold;
 }
 
+input, textarea, button {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #28a745; /* Green */
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+/* Add color to other buttons if needed */
+button#btn {
+    background-color: #007bff; /* Blue */
+}
+
+button#btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive design for small screens */
+@media only screen and (max-width: 600px) {
+    #wrapper {
+        width: 90%;
+        margin: 20px auto;
+    }
+}
+
+.sea{
+    margin-left: 70rem; 
+}

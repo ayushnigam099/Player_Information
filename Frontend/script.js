@@ -1,30 +1,36 @@
-const button= document.getElementsByTagName("button");
+let name= document.getElementById("name");
+let date= document.getElementById("date");
+let photo= document.getElementById("photo");
+let birth= document.getElementById("birth");
+let career= document.getElementById("career");
+let matches= document.getElementById("matches");
+let score= document.getElementById("score");
+let fifties= document.getElementById("fifties");
+let centuries= document.getElementById("centuries");
+let wickets= document.getElementById("wickets");
+let average= document.getElementById("average");
+let submit= document.getElementById("btn")
 
-button[0].addEventListener('click', form);
-button[1].addEventListener('click', form);
-button[2].addEventListener('click', form);
-button[3].addEventListener('click', form);
-function form(e)
-{
-  e.preventDefault();
-  var form = document.createElement('form');
-  form.id = 'meetingForm';
-  form.innerHTML = `
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
-      <br>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-      <br>
-      <input type="submit" value="Submit">
-  `;
-  
-  this.parentNode.after(form);
-
-form.addEventListener('submit', (e)=>
-  {
-    e.preventDefault();
-    var name= document.querySelector('#name').value;
-    var email=document.querySelector('#email').value;
-}); 
+submit.addEventListener('click', async function(e){
+e.preventDefault();
+const details = {
+    name: name.value,
+    date: date.value,
+    photo: photo.value,
+    birth: birth.value,
+    career: career.value,
+    matches: matches.value,
+    score: score.value,
+    fifties: fifties.value,
+    centuries: centuries.value,
+    wickets: wickets.value,
+    average: average.value,
+}; 
+try{  
+ await axios.post("http://localhost:3500/add-player", details);
 }
+catch(err)
+{
+    console.log(err);
+}
+})
