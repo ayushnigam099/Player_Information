@@ -29,7 +29,7 @@ const Player = sequelize.define('Player', {
         allowNull: false,
       },
       career: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
      matches: {
@@ -53,7 +53,7 @@ const Player = sequelize.define('Player', {
         allowNull: false,
       },
      average: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.DOUBLE,
         allowNull: false,
       },
   });
@@ -73,8 +73,18 @@ const Player = sequelize.define('Player', {
        const centuries= req.body.centuries;
        const wickets= req.body.wickets;
        const average= req.body.average;
-       const {dataValues}= await Expense.create({
-
+       const {dataValues}= await Player.create({
+          name,
+          date,
+          photo,
+          birth,
+          career,
+          matches,
+          score,
+          fifties,
+          centuries,
+          wickets,
+          average
         })
             console.log("data",dataValues) ;
             res.status(200).json({Success: dataValues});   
@@ -87,6 +97,23 @@ const Player = sequelize.define('Player', {
 
   })
 
+
+  app.get('/get-player/:name', async(req,res,next)=>
+  {
+   let name= req.params.name;
+  //  console.log(name);
+  let dataValues = await Player.findByPk(name);
+    if(!dataValues){
+      res.status(400).json({Error: "Record Not Found"});
+      return;
+    }
+    else
+    {
+      dataValues= dataValues.dataValues;
+      res.status(200).json({dataValues: dataValues})
+    }
+    
+  })
 
   sequelize
   .sync()
