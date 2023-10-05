@@ -8,12 +8,18 @@ app.use(bodyParser.json({extended:false}));
 app.use(cors());
 
 const Player = sequelize.define('Player', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    unique: true,
+    primaryKey: true,
+    
+  },
     name: {
       type: Sequelize.STRING,
       allowNull: false,
       unique: true,
-      primaryKey: true,
-      
     },
    
     date: {
@@ -60,7 +66,8 @@ const Player = sequelize.define('Player', {
 
   app.post('/add-player', async (req,res,next)=>
   {
-      console.log(req.body);
+      // console.log(req.body);
+
       try{
        const name= req.body.name;
        const date= req.body.date;
@@ -101,8 +108,13 @@ const Player = sequelize.define('Player', {
   app.get('/get-player/:name', async(req,res,next)=>
   {
    let name= req.params.name;
-  //  console.log(name);
-  let dataValues = await Player.findByPk(name);
+  // console.log(name);
+  let dataValues = await Player.findOne({
+    where: {
+      name: name
+    }
+  });
+  console.log(dataValues);
     if(!dataValues){
       res.status(400).json({Error: "Record Not Found"});
       return;
@@ -114,6 +126,57 @@ const Player = sequelize.define('Player', {
     }
     
   })
+
+app.get('/id-player/:id', async(req,res,next)=>
+{
+  let id= req.params.id;
+  // console.log(name);
+  let dataValues = await Player.findByPk(id);
+  console.log(dataValues);
+    if(!dataValues){
+      res.status(400).json({Error: "Record Not Found"});
+      return;
+    }
+    else
+    {
+      dataValues= dataValues.dataValues;
+      res.status(200).json({dataValues: dataValues})
+    }
+})
+
+
+  app.put('/update-player/:id', async(req,res,next)=>
+  {
+    let userID= req.params.id;
+    try {
+       let updatedDetails={ 
+           name: req.body.name,
+           date: req.body.date,
+           photo:req.body.photo,
+           birth:req.body.birth,
+           career: req.body.career,
+           matches: req.body.matches,
+           score: req.body.score,
+           fifties: req.body.fifties,
+           centuries: req.body.centuries,
+           wickets: req.body.wickets,
+           average: req.body.average
+      }
+        // Update the player's details where name matches playerName
+        let data = await Player.update(updatedDetails, {
+            where: { id: userID },
+            returning: true, // Return the updated record(s)
+        });
+            console.log(`Player updated successfully.`);
+            // console.log(data);
+            res.status(202).json({Success: "Updated Successfully"});
+    } catch (err) {
+      console.error(`Error updating player:`, err);
+      // res.status(400).json({Error: "Record Not Found"});
+    }
+  })
+
+
 
   sequelize
   .sync()
