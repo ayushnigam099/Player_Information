@@ -118,3 +118,11 @@ button.edt-btn {
 button.edt-btn:hover {
     background-color: #45a049;
 }
+.ply{
+    font-weight: bold;
+    font-size: 20px;
+    color: darkviolet;
+    text-align: center;
+    background-color: #95bae4;
+
+}

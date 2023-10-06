@@ -144,6 +144,9 @@ async function updatePlayer(e,id) {
     try {
         // Send a PUT request to update the player's details
         await axios.put(`http://localhost:3500/update-player/${id}`, updatedDetails);
+        let {data} = await axios.get(`http://localhost:3500/id-player/${id}`);
+        data=data.dataValues;
+        create(data);
         alert('Player details updated successfully!');
         form.reset();
         submit.addEventListener('click', onSubmit)
